@@ -3,16 +3,27 @@
 # On Mac OS X, you don't need to add `sudo`.
 
 start(){
-  docker build -t yuchan/angular-todo .
-  docker pull tutum/mongodb
-
-  docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no --name mongodb tutum/mongodb
-  docker run -d -p 5000:5000 --link mongodb:db --name web -t yuchan/angular-todo
+  case $1 in
+    "web")
+    docker build -t yuchan/angular-todo .
+    docker run -d -p 5000:5000 --link mongodb:db --name web -t yuchan/angular-todo
+    ;;
+    "db")
+    docker pull tutum/mongodb
+    docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no --name mongodb tutum/mongodb
+    ;;
+    *)
+    docker build -t yuchan/angular-todo .
+    docker pull tutum/mongodb
+    docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no --name mongodb tutum/mongodb
+    docker run -d -p 5000:5000 --link mongodb:db --name web -t yuchan/angular-todo
+    ;;
+  esac
 }
 
 stop() {
-  docker stop web mongodb
-  docker rm web mongodb
+  docker stop $1
+  docker rm $1
 }
 
 addr() {
@@ -21,15 +32,18 @@ addr() {
 
 option="${1}"
 case ${option} in
-  "start")
+  "init")
       start
+      ;;
+  "start")
+      start web
       ;;
   "stop")
-      stop
+      stop web
       ;;
   "restart")
-      stop
-      start
+      stop web
+      start web
       ;;
   "addr")
       addr
