@@ -9,7 +9,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 5000;
-mongoose.connect("mongodb://localhost/todoapp");
+var host = process.env.DB_PORT_27017_TCP_ADDR || "localhost";
+
+mongoose.connect("mongodb://" + host + "/todoapp");
 
 router.get('/', function(req, res){
   res.json({message: 'this is my first api.'});
