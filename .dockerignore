@@ -1,0 +1,9 @@
+README.md
+
+Vagrantfile
+.vagrant
+provision.sh
+deploy.sh
+
+.gitignore
+.git
