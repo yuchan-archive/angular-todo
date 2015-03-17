@@ -51,7 +51,7 @@ router.route('/todo/:id')
       return;
     }
 
-    todo.done = req.body.done
+    todo.done = req.body.done;
     todo.save(function(err){
       if(err){
         res.send(err);
