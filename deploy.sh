@@ -22,12 +22,13 @@ start(){
 }
 
 stop() {
-  docker stop $1
-  docker rm $1
+  docker stop "$1"
+  docker rm "$1"
 }
 
 addr() {
-  echo $(boot2docker ip 2>/dev/null)
+  boot2docker ip 2>/dev/null
+  echo ""
 }
 
 option="${1}"
