@@ -14,7 +14,13 @@ var port = process.env.PORT || 5000;
 var host = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL || "mongodb://" + process.env.DB_PORT_27017_TCP_ADDR + "/todoapp" || "mongodb://localhost/todoapp";
 
-mongoose.connect(host);
+mongoose.connect(host, function(err, res) {
+  if (err) {
+    console.log('ERROR connecting to: ' + host + '. ' + err);
+  } else {
+    console.log('Succeeded connected to: ' + host);
+  }
+});
 
 router.get('/', function(req, res) {
   res.json({
