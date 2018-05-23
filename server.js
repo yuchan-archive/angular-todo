@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 5000;
 var host = process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL || "mongodb://" + process.env.DB_PORT_27017_TCP_ADDR + "/todoapp" || "mongodb://localhost/todoapp";
+  process.env.MONGOHQ_URL || "mongodb://localhost/todoapp";
 
 mongoose.connect(host, function(err, res) {
   if (err) {
