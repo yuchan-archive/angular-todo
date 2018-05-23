@@ -5,6 +5,6 @@ I am on top of MEAN stack.
 
 ## Todo
 
-[] login api.
-[] login from JS.
-[] prepare docker-compose.yml
+[ ] login api.
+[ ] login from JS.
+[ ] prepare docker-compose.yml
